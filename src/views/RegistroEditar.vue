@@ -23,7 +23,7 @@
             <v-card-text>¿Estas seguro de que quieres eliminar este elemento?</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="dialog = false">NO</v-btn>
+              <v-btn color="primary" text @click="modalEliminar = false">NO</v-btn>
               <!--aqui boton para eliminar---------->
               <v-btn color="primary" text @click="eliminarRegistro(registro.id)">SI</v-btn>
             </v-card-actions>

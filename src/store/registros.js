@@ -1,4 +1,5 @@
 import { db } from "../firebase";
+import router from "../router";
 export default {
     namespaced: true,
     state: {
@@ -72,7 +73,7 @@ export default {
                 })
                 .then(() => {
                     console.log("tarea editada");
-                    //  router.push("/registros");
+                    router.push("/registros");
                 });
         },
         agregarRegistro({ commit }, nuevo) {
@@ -98,10 +99,7 @@ export default {
                 .delete()
                 .then(() => {
                     console.log("tarea eliminada");
-                    console.log(this.mensaje);
                     router.push("/registros");
-                    commit("notificar");
-                    console.log(this.mensaje);
                 });
         },
     },

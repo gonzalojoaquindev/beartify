@@ -138,7 +138,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("registro", ["agregarRegistro"]),
+    ...mapActions("registros", ["agregarRegistro"]),
   },
 };
 </script>
