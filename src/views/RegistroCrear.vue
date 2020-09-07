@@ -36,7 +36,9 @@
           </v-col>
           <!--categorias-->
           <v-col cols="6">
-            <v-select :items="categorias" label="Categoria" v-model="nuevo.categoria"></v-select>
+            <router-link :to="{name:'CategoriaSelec'}">
+              <v-select :items="categorias" label="Categoria" v-model="nuevo.categoria"></v-select>
+            </router-link>
           </v-col>
         </v-row>
         <!--Fin Cuentas y categorias-------------------->
@@ -110,9 +112,6 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  props: {
-    source: String,
-  },
   name: "RegistroCrear",
 
   data() {

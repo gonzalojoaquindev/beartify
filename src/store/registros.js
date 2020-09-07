@@ -38,12 +38,12 @@ export default {
                 .get()
                 .then((res) => {
                     res.forEach((doc) => {
-                        console.log("registros leidos correctamente");
                         let registro = doc.data();
                         registro.id = doc.id;
                         registros.push(registro);
                     });
                     commit("setRegistros", registros);
+                    console.log("registros leidos correctamente");
                 });
         },
         getRegistro({ commit }, idRegistro) {

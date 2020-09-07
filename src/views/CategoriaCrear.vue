@@ -37,14 +37,14 @@
         <!--Incio de inputs---------->
         <v-row>
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Nombre de la Categoría"></v-text-field>
+            <v-text-field label="Nombre de la Categoría" v-model="nuevaCategoria.nombre"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="icono"></v-text-field>
+            <v-text-field label="icono" v-model="nuevaCategoria.icono"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="color"></v-text-field>
+            <v-text-field label="color" v-model="nuevaCategoria.color"></v-text-field>
           </v-col>
         </v-row>
         <!--Fin de inputs---------->

@@ -69,6 +69,18 @@ const routes = [{
         component: () =>
             import ("../views/Ajustes.vue"),
     },
+    {
+        path: "/selecionarcategoria",
+        name: "CategoriaSelec",
+        component: () =>
+            import ("../views/CategoriaSelec.vue"),
+    },
+    {
+        path: "/selecionarsubcategoria",
+        name: "CategoriaSubSelec",
+        component: () =>
+            import ("../views/CategoriaSubSelec.vue"),
+    },
 ];
 
 const router = new VueRouter({

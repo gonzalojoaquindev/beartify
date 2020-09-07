@@ -1,14 +1,14 @@
 <template>
   <div>
     <!--incio de formulario------------------------------------------->
-    <v-form @submit.prevent="editarCategoria(categoria)">
+    <v-form @submit.prevent="editarCuenta(cuenta)">
       <!--Incio de toolbar--------------------------->
       <v-toolbar>
-        <v-btn icon :to="{ name: 'RegistroLeer' }">
+        <v-btn icon :to="{ name: 'CuentaLeer' }">
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
-        <v-toolbar-title>Detalle de registro</v-toolbar-title>
+        <v-toolbar-title>Detalle de cuenta</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <!--Ventana modal------------>
@@ -25,7 +25,7 @@
               <v-spacer></v-spacer>
               <v-btn color="primary" text @click="modalEliminar = false">NO</v-btn>
               <!--aqui boton para eliminar---------->
-              <v-btn color="primary" text @click="eliminarRegistro(registro.id)">SI</v-btn>
+              <v-btn color="primary" text @click="eliminarCuenta(cuenta.id)">SI</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -41,109 +41,34 @@
 
       <!--Fin de toolbar-------------------------------->
 
-      <!--Selector-->
-      <v-tabs :value="registro.tipo" :grow="true" v-model="registro.tipo">
-        <v-tab>INGRESO</v-tab>
-        <v-tab>GASTO</v-tab>
-        <v-tab>TRANSFERIR</v-tab>
-      </v-tabs>
-      <!------------->
-
-      <!--Monto y moneda--------------------->
       <v-container>
-        <v-row>
-          <!--Monto----------------->
-          <v-col cols="6" sm="6" md="3">
-            <v-text-field label="Monto" type="number" prefix="$" v-model="registro.monto"></v-text-field>
-          </v-col>
-          <!---------------------------->
-          <!--Moneda-------------------------->
+        <!--Fin Ventana modal para salir---------->
 
-          <v-col cols="6" sm="6" md="3">
-            <v-select :items="moneda" label="Moneda"></v-select>
+        <!--Incio de inputs---------->
+        <v-row>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="Nombre de la cuenta" v-model="cuenta.nombre"></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="Número de la cuenta bancaria" v-model="cuenta.numero"></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="Institucion Bancaria o comercial" v-model="cuenta.institucion"></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="Icono" v-model="cuenta.icono"></v-text-field>
+          </v-col>
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-select :items="tipo" label="Tipo de cuenta" v-model="cuenta.tipo"></v-select>
+          </v-col>
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-select :items="color" label="Color" v-model="cuenta.color"></v-select>
+          </v-col>
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-select :items="moneda" label="moneda" v-model="cuenta.moneda"></v-select>
           </v-col>
         </v-row>
-        <!---------------------------------->
-
-        <!--Cuentas y categorias-------------------->
-        <v-row>
-          <!--Cuentas-->
-          <v-col cols="6">
-            <v-select :items="categorias" label="Categoria" v-model="registro.categoria"></v-select>
-          </v-col>
-          <!--Categorias-->
-          <v-col cols="6">
-            <v-select :items="cuentas" label="Cuenta" v-model="registro.cuenta"></v-select>
-          </v-col>
-        </v-row>
-        <!--Fin Cuentas y categorias-------------------->
-
-        <!--Fecha y hora--------------------------->
-
-        <v-row>
-          <!--Input Fecha-->
-          <v-col cols="6">
-            <v-dialog
-              ref="dialog"
-              v-model="modalFecha"
-              :return-value.sync="date"
-              persistent
-              width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="registro.fecha"
-                  label="Fecha"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-
-              <v-date-picker v-model="registro.fecha" scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalFecha = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-dialog>
-          </v-col>
-          <!--Fin Fecha-->
-
-          <!--Input hora-->
-          <v-col cols="6">
-            <v-dialog
-              ref="dialog"
-              v-model="modalHora"
-              :return-value.sync="time"
-              persistent
-              width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="registro.hora"
-                  label="Hora"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-time-picker v-if="modalHora" v-model="registro.hora" full-width>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalHora = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
-              </v-time-picker>
-            </v-dialog>
-          </v-col>
-        </v-row>
-        <!--Fin hora-->
-
-        <!--Fecha y hora--------------------------->
-
-        <!--Input notas-->
-        <v-text-field label="Notas" v-model="registro.nota"></v-text-field>
-
-        <!--Input Beneficiado-->
-        <v-text-field label="Beneficiado" v-model="registro.beneficiado"></v-text-field>
+        <!--Fin de inputs---------->
       </v-container>
     </v-form>
   </div>
@@ -155,27 +80,26 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  name: "CategoriaEditar",
+  name: "CuentaEditar",
   data() {
     return {
       item: 1,
       modalSalir: false,
       modalEliminar: false,
       id: this.$route.params.id,
+      moneda: ["CLP", "USD"],
+      color: ["orange", "blue", "red", "teal", "yellow", "pink", "green"],
+      tipo: ["Debito", "Debito con sobregiro", "Crédito", "Ahorro", "Efectivo"],
     };
   },
   created() {
-    this.getCategoria(this.id);
+    this.getCuenta(this.id);
   },
   methods: {
-    ...mapActions("categorias", [
-      "getCategoria",
-      "editarCategoria",
-      "eliminarCategoria",
-    ]),
+    ...mapActions("cuentas", ["getCuenta", "editarCuenta", "eliminarCuenta"]),
   },
   computed: {
-    ...mapState("categorias", ["categoria"]),
+    ...mapState("cuentas", ["cuenta"]),
   },
 };
 </script>

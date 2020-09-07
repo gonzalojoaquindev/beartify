@@ -25,12 +25,12 @@ export default {
                 .get()
                 .then((res) => {
                     res.forEach((doc) => {
-                        console.log("categoria", doc.id);
                         let categoria = doc.data();
                         categoria.id = doc.id;
                         categorias.push(categoria);
                     });
                     commit("setCategorias", categorias);
+                    console.log("categorias leidas correctamente");
                 });
         },
         getCategoria({ commit }, idCategoria) {
@@ -38,7 +38,8 @@ export default {
                 .doc(idCategoria)
                 .get()
                 .then((doc) => {
-                    console.log(doc.id);
+                    console.log("categoria leida correctamente");
+                    console.log(doc.data());
                     let categoria = doc.data();
                     categoria.id = doc.id;
                     commit("setCategoria", categoria);
@@ -53,8 +54,8 @@ export default {
                     color: categoria.color,
                 })
                 .then(() => {
-                    console.log("categoria editada");
-                    //  router.push("/categorias");
+                    console.log("categoria editada correctamente");
+                    router.push("/categorias");
                 });
         },
         agregarCategoria({ commit }, nuevo) {
@@ -65,7 +66,7 @@ export default {
                     color: nuevo.color,
                 })
                 .then((doc) => {
-                    console.log(doc.id);
+                    console.log("categoria agregada correctamente");
                     router.push("/categorias");
                 });
         },
@@ -74,7 +75,7 @@ export default {
                 .doc(idCategoria)
                 .delete()
                 .then(() => {
-                    console.log("categoria eliminada");
+                    console.log("categoria eliminada correctamente");
                     router.push("/categorias");
                 });
         },

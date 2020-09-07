@@ -21,6 +21,7 @@
 import { mapActions, mapState } from "vuex";
 export default {
   name: "TarjetaCategoria",
+
   created() {
     this.getCategorias();
   },
