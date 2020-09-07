@@ -10,7 +10,7 @@ const routes = [{
             import ("../views/Home.vue"),
     },
     {
-        path: "/editarcuenta",
+        path: "/editarcuenta/:id",
         name: "CuentaEditar",
         component: () =>
             import ("../views/CuentaEditar.vue"),
@@ -46,7 +46,7 @@ const routes = [{
             import ("../views/RegistroLeer.vue"),
     },
     {
-        path: "/editarcategoria",
+        path: "/editarcategoria/:id",
         name: "CategoriaEditar",
         component: () =>
             import ("../views/CategoriaEditar.vue"),

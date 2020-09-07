@@ -38,8 +38,7 @@ export default {
                 .get()
                 .then((res) => {
                     res.forEach((doc) => {
-                        console.log(doc.id);
-                        console.log("accion nose porque");
+                        console.log("registros leidos correctamente");
                         let registro = doc.data();
                         registro.id = doc.id;
                         registros.push(registro);
@@ -52,7 +51,7 @@ export default {
                 .doc(idRegistro)
                 .get()
                 .then((doc) => {
-                    console.log(doc.id);
+                    console.log("registro leido correctamente");
                     let registro = doc.data();
                     registro.id = doc.id;
                     commit("setRegistro", registro);
@@ -72,7 +71,7 @@ export default {
                     nota: registro.nota,
                 })
                 .then(() => {
-                    console.log("tarea editada");
+                    console.log("registro editado correctamente");
                     router.push("/registros");
                 });
         },
@@ -89,7 +88,7 @@ export default {
                     nota: nuevo.nota,
                 })
                 .then((doc) => {
-                    console.log(doc.id);
+                    console.log("registro agregado correctamente");
                     router.push("/registros");
                 });
         },
@@ -98,7 +97,7 @@ export default {
                 .doc(idRegistro)
                 .delete()
                 .then(() => {
-                    console.log("tarea eliminada");
+                    console.log("registro eliminado correctamente");
                     router.push("/registros");
                 });
         },

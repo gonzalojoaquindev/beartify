@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--incio de formulario------------------------------------------->
-    <form @submit.prevent="editarRegistro(registro)">
+    <v-form @submit.prevent="editarRegistro(registro)">
       <!--Incio de toolbar--------------------------->
       <v-toolbar>
         <v-btn icon :to="{ name: 'RegistroLeer' }">
@@ -145,7 +145,7 @@
         <!--Input Beneficiado-->
         <v-text-field label="Beneficiado" v-model="registro.beneficiado"></v-text-field>
       </v-container>
-    </form>
+    </v-form>
   </div>
   <!--fin del formulario----------------------------------------->
 </template>

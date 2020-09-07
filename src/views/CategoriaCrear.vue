@@ -31,26 +31,24 @@
           <v-icon>mdi-check</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-app>
-        <v-container>
-          <!--Fin Ventana modal para salir---------->
+      <v-container>
+        <!--Fin Ventana modal para salir---------->
 
-          <!--Incio de inputs---------->
-          <v-row>
-            <v-col cols="12" sm="6" md="3">
-              <v-text-field label="Nombre de la Categoría"></v-text-field>
-            </v-col>
+        <!--Incio de inputs---------->
+        <v-row>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="Nombre de la Categoría"></v-text-field>
+          </v-col>
 
-            <v-col cols="12" sm="6" md="3">
-              <v-text-field label="icono"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="3">
-              <v-text-field label="color"></v-text-field>
-            </v-col>
-          </v-row>
-          <!--Fin de inputs---------->
-        </v-container>
-      </v-app>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="icono"></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="6" md="3">
+            <v-text-field label="color"></v-text-field>
+          </v-col>
+        </v-row>
+        <!--Fin de inputs---------->
+      </v-container>
     </v-form>
   </div>
 </template>
