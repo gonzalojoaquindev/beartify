@@ -8,7 +8,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
-        <v-toolbar-title>{{categoria.nombre}}</v-toolbar-title>
+        <v-toolbar-title>Editar subcategoria</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <!--Ventana modal------------>
@@ -42,56 +42,17 @@
 
         <!--Incio de inputs---------->
         <v-row>
-          <v-avatar class="mx-auto mb-1" size="70" :class="categoria.color">
-            <v-icon size="50">{{categoria.icono}}</v-icon>
-          </v-avatar>
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Nombre de la Categoría" v-model="categoria.nombre"></v-text-field>
+            <v-text-field
+              label="Nombre de la subcategoría"
+              v-model="categoria.sub[position].nombre"
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="icono" v-model="categoria.icono"></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="color" v-model="categoria.color"></v-text-field>
+            <v-text-field label="icono" v-model="categoria.sub[position].icono"></v-text-field>
           </v-col>
         </v-row>
-
-        <v-subheader v-if="categoria.sub != ['']">SUBCATEGORIAS</v-subheader>
-        <v-row>
-          <v-card width="96%" class="mx-auto mb-1" v-for="item in categoria.sub" :key="item.title">
-            <v-list>
-              <v-list-item
-                :to="{name:'SubcategoriaEditar', 
-                params:
-                {id: categoria.id,
-                position: categoria.sub.indexOf(item)}
-                }"
-              >
-                <v-list-item-avatar :color="categoria.color">
-                  <v-icon>{{item.icono}}</v-icon>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title>{{item.nombre}}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
-          </v-card>
-          <v-btn
-            :to="{name: 'SubcategoriaCrear'}"
-            absolute
-            dark
-            fab
-            bottom
-            right
-            fixed
-            color="secondary"
-          >
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-        </v-row>
-
         <!--Fin de inputs---------->
       </v-container>
     </v-form>
@@ -111,6 +72,7 @@ export default {
       modalSalir: false,
       modalEliminar: false,
       id: this.$route.params.id,
+      position: this.$route.params.position,
     };
   },
   created() {

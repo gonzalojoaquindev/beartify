@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <Navbar :titulo="'Editar categorias'" />
+    <Navbar :titulo="'Categorias'" />
     <TarjetaCategoria />
     <v-btn :to="{name: 'CategoriaCrear'}" absolute dark fab bottom right fixed color="secondary">
       <v-icon>mdi-plus</v-icon>

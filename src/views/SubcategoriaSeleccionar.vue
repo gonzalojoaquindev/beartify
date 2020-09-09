@@ -28,7 +28,7 @@
             </v-list-item>
           </v-list>
         </v-card>
-        <v-subheader>SUBCATEGORIAS</v-subheader>
+        <v-subheader v-if="categoria.sub != ['']">SUBCATEGORIAS</v-subheader>
 
         <v-card width="96%" class="mx-auto mb-1" v-for="item in categoria.sub" :key="item.title">
           <v-list>
@@ -51,7 +51,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  name: "CategoriaSubSelec",
+  name: "SubcategoriaSeleccionar",
   data() {
     return {
       id: this.$route.params.id,

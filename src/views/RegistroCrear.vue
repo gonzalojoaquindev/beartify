@@ -36,7 +36,7 @@
           </v-col>
           <!--categorias-->
           <v-col cols="6">
-            <router-link :to="{name:'CategoriaSelec'}">
+            <router-link :to="{name:'CategoriaSeleccionar'}">
               <v-select :items="categorias" label="Categoria" v-model="nuevo.categoria"></v-select>
             </router-link>
           </v-col>

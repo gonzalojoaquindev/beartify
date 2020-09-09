@@ -8,6 +8,9 @@ export default {
             nombre: "",
             icono: "",
             color: "",
+            sub: [
+                { nombre: "", icono: "" }
+            ]
         },
     },
     mutations: {
@@ -76,6 +79,39 @@ export default {
                 .delete()
                 .then(() => {
                     console.log("categoria eliminada correctamente");
+                    router.push("/categorias");
+                });
+        },
+        editarSubcategoria({ commit }, subcategoria) {
+            db.collection("categorias")
+                .doc(subcategoria.id)
+                .update({
+                    nombre: subcategoria.nombre,
+                    icono: subcategoria.icono,
+
+                })
+                .then(() => {
+                    console.log("subcategoria editada correctamente");
+                    router.push("/categorias");
+                });
+        },
+        agregarSubcategoria({ commit }, nuevo) {
+            db.collection("categorias")
+                .add({
+                    nombre: nuevo.nombre,
+                    icono: nuevo.icono,
+                })
+                .then((doc) => {
+                    console.log("categoria agregada correctamente");
+                    router.push("/categorias");
+                });
+        },
+        eliminarSubategoria({ commit }, idSubategoria) {
+            db.collection("categorias")
+                .doc(idSubcategoria)
+                .delete()
+                .then(() => {
+                    console.log("subcategoria eliminada correctamente");
                     router.push("/categorias");
                 });
         },

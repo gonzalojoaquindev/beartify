@@ -12,6 +12,9 @@ export default {
             moneda: "",
             numero: "",
             tipo: "",
+            cupo: "",
+            vencimiento: "",
+            utilizado: ""
         },
     },
     mutations: {
@@ -59,6 +62,9 @@ export default {
                     tipo: cuenta.tipo,
                     moneda: cuenta.moneda,
                     numero: cuenta.numero,
+                    cupo: cuenta.cupo,
+                    vencimiento: cuenta.vencimiento,
+                    saldo: cuenta.saldo
                 })
                 .then(() => {
                     console.log("cuenta editada correctamente");
@@ -75,6 +81,9 @@ export default {
                     color: nuevo.color,
                     moneda: nuevo.moneda,
                     numero: nuevo.numero,
+                    saldo: nuevo.saldo,
+                    vencimiento: nuevo.vencimiento,
+                    cupo: nuevo.cupo
                 })
                 .then((doc) => {
                     console.log("cuenta agregada correctamente");

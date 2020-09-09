@@ -9,7 +9,7 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon :to="{name:'CategoriaLeer'}">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-toolbar>
@@ -18,7 +18,7 @@
       <v-row>
         <v-card width="96%" class="mx-auto mb-1" v-for="item in categorias" :key="item.title">
           <v-list>
-            <v-list-item :to="{name: 'CategoriaSubSelec', params:{id: item.id}}">
+            <v-list-item :to="{name:'SubcategoriaSeleccionar', params:{id: item.id}}">
               <v-list-item-avatar>
                 <v-icon :class="item.color" v-text="item.icono"></v-icon>
               </v-list-item-avatar>

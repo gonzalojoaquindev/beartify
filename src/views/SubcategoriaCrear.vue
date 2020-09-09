@@ -15,15 +15,13 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" text @click="modalSalir = false">NO</v-btn>
-                <v-btn color="primary" text>
-                  <router-link to="/cuentas">SI</router-link>
-                </v-btn>
+                <v-btn color="primary" :to="{name:'CategoriaLeer'}" text>SI</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
         </v-app-bar-nav-icon>
 
-        <v-toolbar-title>Nueva Categoria</v-toolbar-title>
+        <v-toolbar-title>Crear subcategoria</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <!--Ventana modal para salir------------>
@@ -45,9 +43,6 @@
 
           <v-col cols="12" sm="6" md="3">
             <v-text-field label="icono" v-model="nuevaCategoria.icono"></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="6" md="3">
-            <v-text-field label="color" v-model="nuevaCategoria.color"></v-text-field>
           </v-col>
         </v-row>
         <!--Fin de inputs---------->

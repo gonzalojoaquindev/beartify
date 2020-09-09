@@ -49,6 +49,39 @@
           <v-col cols="12" sm="6" md="3">
             <v-text-field label="Nombre de la cuenta" v-model="cuenta.nombre"></v-text-field>
           </v-col>
+          <v-col class="d-flex" cols="12" sm="6">
+            <v-select :items="tipo" label="Tipo de cuenta" v-model="cuenta.tipo"></v-select>
+          </v-col>
+          <v-col v-if="cuenta.tipo !== 'Crédito'" cols="12" sm="6">
+            <v-text-field type="number" label="Saldo actual" v-model="cuenta.saldo"></v-text-field>
+          </v-col>
+        </v-row>
+        <!--Si es credito o con linea de credito-->
+        <v-row v-if="cuenta.tipo === 'Crédito' || cuenta.tipo === 'Debito con sobregiro'">
+          <v-col cols="6" sm="6">
+            <v-text-field
+              label="Límite de tarjeta de crédito"
+              v-model="cuenta.cupo"
+              :prefix="cuenta.moneda"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="6" sm="6">
+            <v-text-field
+              type="number"
+              label="Línea de crédtio utilizada"
+              v-model="cuenta.utilizado"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12">
+            <v-text-field
+              type="number"
+              label="Fecha de vencimiento del pago"
+              v-model="cuenta.vencimiento"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
           <v-col cols="12" sm="6" md="3">
             <v-text-field label="Número de la cuenta bancaria" v-model="cuenta.numero"></v-text-field>
           </v-col>
@@ -58,9 +91,7 @@
           <v-col cols="12" sm="6" md="3">
             <v-text-field label="Icono" v-model="cuenta.icono"></v-text-field>
           </v-col>
-          <v-col class="d-flex" cols="12" sm="6">
-            <v-select :items="tipo" label="Tipo de cuenta" v-model="cuenta.tipo"></v-select>
-          </v-col>
+
           <v-col class="d-flex" cols="12" sm="6">
             <v-select :items="color" label="Color" v-model="cuenta.color"></v-select>
           </v-col>
@@ -88,7 +119,24 @@ export default {
       modalEliminar: false,
       id: this.$route.params.id,
       moneda: ["CLP", "USD"],
-      color: ["orange", "blue", "red", "teal", "yellow", "pink", "green"],
+      color: [
+        "orange",
+        "blue",
+        "red",
+        "teal",
+        "yellow",
+        "pink",
+        "green",
+        "deep-purple",
+        "purple",
+        "indigo",
+        "cyan",
+        "lime",
+        "amber",
+        "deep-orange",
+        "brown",
+        "blue-grey",
+      ],
       tipo: ["Debito", "Debito con sobregiro", "Crédito", "Ahorro", "Efectivo"],
     };
   },

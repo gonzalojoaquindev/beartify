@@ -9,6 +9,8 @@ const routes = [{
         component: () =>
             import ("../views/Home.vue"),
     },
+
+    //Cuentas
     {
         path: "/editarcuenta/:id",
         name: "CuentaEditar",
@@ -27,6 +29,8 @@ const routes = [{
         component: () =>
             import ("../views/CuentaCrear.vue"),
     },
+
+    //Registros
     {
         path: "/crearregistro",
         name: "RegistroCrear",
@@ -45,6 +49,8 @@ const routes = [{
         component: () =>
             import ("../views/RegistroLeer.vue"),
     },
+
+    //Categorias
     {
         path: "/editarcategoria/:id",
         name: "CategoriaEditar",
@@ -64,23 +70,45 @@ const routes = [{
             import ("../views/CategoriaCrear.vue"),
     },
     {
+        path: "/selecionarcategoria",
+        name: "CategoriaSeleccionar",
+        component: () =>
+            import ("../views/CategoriaSeleccionar.vue"),
+    },
+
+    //Subcategorias
+    {
+        path: "/editarsubcategoria/:id/:position",
+        name: "SubcategoriaEditar",
+        component: () =>
+            import ("../views/SubcategoriaEditar.vue"),
+    },
+    {
+        path: "/subcategorias",
+        name: "SubcategoriaLeer",
+        component: () =>
+            import ("../views/SubcategoriaLeer.vue"),
+    },
+    {
+        path: "/crearsubcategoria",
+        name: "SubcategoriaCrear",
+        component: () =>
+            import ("../views/SubcategoriaCrear.vue"),
+    },
+    {
+        path: "/selecionarsubcategoria",
+        name: "SubcategoriaSeleccionar",
+        component: () =>
+            import ("../views/SubcategoriaSeleccionar.vue"),
+    },
+    {
         path: "/ajustes",
         name: "Ajustes",
         component: () =>
             import ("../views/Ajustes.vue"),
     },
-    {
-        path: "/selecionarcategoria",
-        name: "CategoriaSelec",
-        component: () =>
-            import ("../views/CategoriaSelec.vue"),
-    },
-    {
-        path: "/selecionarsubcategoria",
-        name: "CategoriaSubSelec",
-        component: () =>
-            import ("../views/CategoriaSubSelec.vue"),
-    },
+
+
 ];
 
 const router = new VueRouter({
