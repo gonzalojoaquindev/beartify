@@ -60,7 +60,7 @@
         <v-row v-if="cuenta.tipo === 'Crédito' || cuenta.tipo === 'Debito con sobregiro'">
           <v-col cols="6" sm="6">
             <v-text-field
-              label="Límite de tarjeta de crédito"
+              label="Límite tarjeta de crédito"
               v-model="cuenta.cupo"
               :prefix="cuenta.moneda"
             ></v-text-field>
