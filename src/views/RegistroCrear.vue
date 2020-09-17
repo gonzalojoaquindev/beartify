@@ -9,7 +9,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn icon type="submit">
+        <v-btn icon type="submit" @click="ajustarSaldo(nuevo)">
           <v-icon>mdi-check</v-icon>
         </v-btn>
       </v-toolbar>
@@ -36,15 +36,17 @@
           </v-col>
           <!--categorias-->
           <v-col cols="6">
-            <router-link :to="{name:'CategoriaSeleccionar'}">
-              <v-select :items="categorias" label="Categoria" v-model="nuevo.categoria"></v-select>
-            </router-link>
+            <!--<router-link :to="{name:'CategoriaSeleccionar'}">-->
+            <v-select :items="categorias" label="Categoria" v-model="nuevo.categoria"></v-select>
+            <!--</router-link>-->
           </v-col>
         </v-row>
         <!--Fin Cuentas y categorias-------------------->
 
         <!--Fecha y hora--------------------------->
-
+        <ul>
+          <li v-for="(cuenta,i) in cuentas" :key="i">{{cuenta.nombre}}</li>
+        </ul>
         <v-row>
           <!--Input Fecha-->
           <v-col cols="6" sm="6" md="4">
@@ -110,7 +112,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "RegistroCrear",
 
@@ -125,19 +127,33 @@ export default {
         hora: new Date().toString().substr(16, 5),
         icon: "",
         tipo: "",
-        cuenta: "cuenta rut",
+        cuenta: "Efectivo",
       },
       date: new Date().toISOString().substr(0, 10),
       modalFecha: false,
       modalHora: false,
       fecha: false,
       time: null,
-      cuentas: ["cuenta rut", "cuenta corriente", "Mastercard Banco Estado"],
       categorias: ["viajes", "casa", "salud", "automovil"],
     };
   },
+  created() {
+    this.getCuentas();
+  },
+
   methods: {
     ...mapActions("registros", ["agregarRegistro"]),
+    ...mapActions("cuentas", ["getCuentas"]),
+  },
+  computed: {
+    ...mapState("cuentas", ["cuentas"]),
+
+    cuentas() {
+      let saldoCuenta = this.cuentas.filter((cuenta) => {
+        return cuenta.tipo === "debito" || cuenta.tipo === "efectivo";
+      });
+      return saldoCuenta;
+    },
   },
 };
 </script>

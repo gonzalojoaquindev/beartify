@@ -20,6 +20,7 @@ export default {
         setCategoria(state, payload) {
             state.categoria = payload;
         },
+
     },
     actions: {
         getCategorias({ commit }) {

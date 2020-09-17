@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <Navbar :titulo="'Inicio'" />
-    <TarjetaCuentaLista />
+    <!--  <TarjetaCuentaLista /> -->
     <TarjetaSaldoCuenta />
-    <TarjetaEstructuraGastos />
+    <!--     <TarjetaEstructuraGastos /> -->
   </v-app>
 </template>
 

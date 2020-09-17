@@ -14,7 +14,8 @@ export default {
             tipo: "",
             cupo: "",
             vencimiento: "",
-            utilizado: ""
+            utilizado: "",
+            saldo: "",
         },
     },
     mutations: {
@@ -26,6 +27,7 @@ export default {
         },
     },
     actions: {
+        //obtener todas las cuentas desde firestore
         getCuentas({ commit }) {
             const cuentas = [];
             db.collection("cuentas")
@@ -36,10 +38,13 @@ export default {
                         cuenta.id = doc.id;
                         cuentas.push(cuenta);
                     });
+
+                    //consolidar información traida desde firestore con la información local.
                     commit("setCuentas", cuentas);
                     console.log("cuentas leidas correctamente");
                 });
         },
+        //obtener una cuenta en particular  a traves de su ID.
         getCuenta({ commit }, idCuenta) {
             db.collection("cuentas")
                 .doc(idCuenta)
@@ -64,7 +69,7 @@ export default {
                     numero: cuenta.numero,
                     cupo: cuenta.cupo,
                     vencimiento: cuenta.vencimiento,
-                    saldo: cuenta.saldo
+                    saldo: cuenta.saldo,
                 })
                 .then(() => {
                     console.log("cuenta editada correctamente");
@@ -83,7 +88,7 @@ export default {
                     numero: nuevo.numero,
                     saldo: nuevo.saldo,
                     vencimiento: nuevo.vencimiento,
-                    cupo: nuevo.cupo
+                    cupo: nuevo.cupo,
                 })
                 .then((doc) => {
                     console.log("cuenta agregada correctamente");
