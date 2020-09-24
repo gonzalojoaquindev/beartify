@@ -10,7 +10,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Gonzalo Araya</v-list-item-title>
-            <v-list-item-subtitle color="secondary">Antbear</v-list-item-subtitle>
+            <v-list-item-subtitle color="secondary">Anthy</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -18,12 +18,17 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item link v-for="(item,index) in links" :key="index" :to="item.ruta">
+        <v-list-item
+          link
+          v-for="(item, index) in links"
+          :key="index"
+          :to="item.ruta"
+        >
           <v-list-item-action>
-            <v-icon color="secondary">{{item.icon}}</v-icon>
+            <v-icon color="secondary">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{item.nombre}}</v-list-item-title>
+            <v-list-item-title>{{ item.nombre }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -35,7 +40,7 @@
 
     <v-app-bar app dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{titulo}}</v-toolbar-title>
+      <v-toolbar-title>{{ titulo }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="d-flex align-center">
         <v-img
@@ -81,6 +86,18 @@ export default {
           icon: "mdi-cash-usd",
           color: "secondary",
           ruta: { name: "CuentaLeer" },
+        },
+        {
+          nombre: "Pagos programados",
+          icon: "mdi-calendar-clock",
+          color: "secondary",
+          ruta: { name: "ProgramadoLeer" },
+        },
+        {
+          nombre: "Beneficiados",
+          icon: "mdi-account",
+          color: "secondary",
+          ruta: { name: "BeneficiadoLeer" },
         },
         {
           nombre: "Ajustes",

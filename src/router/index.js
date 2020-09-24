@@ -101,6 +101,46 @@ const routes = [{
         component: () =>
             import ("../views/SubcategoriaSeleccionar.vue"),
     },
+
+    //Pagos programados
+    {
+        path: "/editarprogramado/:id",
+        name: "ProgramadoEditar",
+        component: () =>
+            import ("../views/ProgramadoEditar.vue"),
+    },
+    {
+        path: "/pagosprogramados",
+        name: "ProgramadoLeer",
+        component: () =>
+            import ("../views/ProgramadoLeer.vue"),
+    },
+    {
+        path: "/crearpagoprogramado",
+        name: "ProgramadoCrear",
+        component: () =>
+            import ("../views/ProgramadoCrear.vue"),
+    },
+
+    //beneficiados
+    {
+        path: "/beneficiados",
+        name: "BeneficiadoLeer",
+        component: () =>
+            import ("../views/BeneficiadoLeer.vue"),
+    },
+    {
+        path: "/creabeneficiado",
+        name: "BeneficiadoCrear",
+        component: () =>
+            import ("../views/BeneficiadoCrear.vue"),
+    },
+    {
+        path: "/editarbeneficiado/:id",
+        name: "BeneficiadoEditar",
+        component: () =>
+            import ("../views/BeneficiadoEditar.vue"),
+    },
     {
         path: "/ajustes",
         name: "Ajustes",
