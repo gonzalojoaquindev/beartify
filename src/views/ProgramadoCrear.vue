@@ -3,9 +3,9 @@
   <!--incio de <formulario------------------------------------------->
   <div>
     <!--formulario------------------------------------------->
-    <v-form @submit.prevent="agregarRegistro(nuevo)">
+    <v-form @submit.prevent="agregarProgramado(nuevo)">
       <v-toolbar>
-        <v-btn icon :to="{ name: 'RegistroLeer' }">
+        <v-btn icon :to="{ name: 'ProgramadoLeer' }">
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
@@ -177,14 +177,14 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="nuevo.seguir.valor"
+                  v-model="nuevo.seguir.evento"
                   label="Fecha"
                   readonly
                   v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="nuevo.seguir.valor" scrollable>
+              <v-date-picker v-model="nuevo.seguir.evento" scrollable>
                 <v-spacer></v-spacer>
                 <v-btn text color="secondary" @click="modalFechaLimite = false"
                   >Cancelar</v-btn
@@ -206,7 +206,7 @@
             <v-text-field
               :suffix="sufijoEvento"
               type="number"
-              v-model="nuevo.seguir.eventos"
+              v-model="nuevo.seguir.evento"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -282,19 +282,20 @@ export default {
         frecuencia: "Repetir",
         repetir: "Repetir mensualmente",
         cada: "1",
-        seguir: { nombre: "Por siempre", eventos: "" },
+        seguir: { nombre: "Por siempre", evento: "" },
         recordar: "Primer día del mes",
         fecha: new Date().toISOString().substr(0, 10),
         icon: "",
         beneficiado: "",
         nota: "",
+        etiqueta: "",
       },
 
       date: new Date().toISOString().substr(0, 10),
       modalFecha: false,
       fecha: false,
       time: null,
-      categorias: ["viajes", "casa", "salud", "automovil"],
+      categorias: ["Diversión", "Casa", "Viajes", "Automovil"],
     };
   },
   created() {
@@ -302,7 +303,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("registros", ["agregarRegistro"]),
+    ...mapActions("programados", ["agregarProgramado"]),
     ...mapActions("cuentas", ["getCuentas"]),
   },
   computed: {

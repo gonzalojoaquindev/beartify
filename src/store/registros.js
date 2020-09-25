@@ -3,8 +3,8 @@ import router from "../router";
 export default {
     namespaced: true,
     state: {
-        registros: [],
-        registro: {
+        programados: [],
+        programado: {
             monto: "",
             moneda: "",
             tipo: "",
@@ -15,70 +15,66 @@ export default {
             hora: "",
             notas: "",
             beneficiado: "",
+            etiqueta: "",
         },
     },
     mutations: {
-        setRegistros(state, payload) {
-            state.registros = payload;
+        setProgramados(state, payload) {
+            state.programados = payload;
         },
-        setRegistro(state, payload) {
-            state.registro = payload;
+        setProgramado(state, payload) {
+            state.programado = payload;
         },
 
-        setCategorias(state, payload) {
-            state.categorias = payload;
-        },
-        setCategoria(state, payload) {
-            state.categoria = payload;
-        },
     },
     actions: {
-        getRegistros({ commit }) {
-            const registros = [];
-            db.collection("registros")
+        getProgramados({ commit }) {
+            const programados = [];
+            db.collection("programados")
                 .get()
                 .then((res) => {
                     res.forEach((doc) => {
-                        let registro = doc.data();
-                        registro.id = doc.id;
-                        registros.push(registro);
+                        let programado = doc.data();
+                        programado.id = doc.id;
+                        programado.push(programados);
                     });
-                    commit("setRegistros", registros);
-                    console.log("registros leidos correctamente");
+                    commit("setProgramados", programados);
+                    console.log("Pagos programados leidos correctamente");
                 });
         },
-        getRegistro({ commit }, idRegistro) {
-            db.collection("registros")
-                .doc(idRegistro)
+        getProgramado({ commit }, idProgramado) {
+            db.collection("programados")
+                .doc(idProgramado)
                 .get()
                 .then((doc) => {
-                    console.log("registro leido correctamente");
-                    let registro = doc.data();
-                    registro.id = doc.id;
-                    commit("setRegistro", registro);
+                    console.log("Pago programado leido correctamente");
+                    let programado = doc.data();
+                    programado.id = doc.id;
+                    commit("setProgramado", programado);
                 });
         },
-        editarRegistro({ commit }, registro) {
-            db.collection("registros")
-                .doc(registro.id)
+        editarProgramado({ commit }, programado) {
+            db.collection("programados")
+                .doc(programado.id)
                 .update({
-                    tipo: registro.tipo,
-                    monto: registro.monto,
-                    categoria: registro.categoria,
-                    cuentaOrigen: registro.cuentaOrigen,
-                    cuentaDestino: registro.cuentaDestino,
-                    fecha: registro.fecha,
-                    hora: registro.hora,
-                    beneficiado: registro.beneficiado,
-                    nota: registro.nota,
+                    tipo: programado.tipo,
+                    monto: programado.monto,
+                    categoria: programado.categoria,
+                    cuentaOrigen: programado.cuentaOrigen,
+                    cuentaDestino: programado.cuentaDestino,
+                    fecha: programado.fecha,
+                    hora: programado.hora,
+                    beneficiado: programado.beneficiado,
+                    nota: programado.nota,
+                    etiqueta: programado.etiqueta,
                 })
                 .then(() => {
-                    console.log("registro editado correctamente");
-                    router.push("/registros");
+                    console.log("Pago programado editado correctamente");
+                    router.push("/pagosprogramados");
                 });
         },
-        agregarRegistro({ commit }, nuevo) {
-            db.collection("registros")
+        agregarProgramado({ commit }, nuevo) {
+            db.collection("programados")
                 .add({
                     tipo: nuevo.tipo,
                     monto: nuevo.monto,
@@ -89,19 +85,20 @@ export default {
                     hora: nuevo.hora,
                     beneficiado: nuevo.beneficiado,
                     nota: nuevo.nota,
+                    etiqueta: nuevo.etiqueta,
                 })
                 .then((doc) => {
-                    console.log("registro agregado correctamente");
-                    router.push("/registros");
+                    console.log("Pago programado agregado correctamente");
+                    router.push("/pagosprogramados");
                 });
         },
-        eliminarRegistro({ commit }, idRegistro) {
-            db.collection("registros")
-                .doc(idRegistro)
+        eliminarProgramado({ commit }, idProgramado) {
+            db.collection("programados")
+                .doc(idProgramado)
                 .delete()
                 .then(() => {
-                    console.log("registro eliminado correctamente");
-                    router.push("/registros");
+                    console.log("Pago programado eliminado correctamente");
+                    router.push("/pagosprogramados");
                 });
         },
     },

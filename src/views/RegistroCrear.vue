@@ -5,7 +5,7 @@
     <!--formulario------------------------------------------->
     <v-form @submit.prevent="agregarRegistro(nuevo)">
       <v-toolbar>
-        <v-btn icon :to="{name:'RegistroLeer'}">
+        <v-btn icon :to="{ name: 'RegistroLeer' }">
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
@@ -71,6 +71,46 @@
               label="Categoria"
               v-model="nuevo.categoria"
             ></v-select>
+
+            <v-row justify="center">
+              <v-dialog
+                v-model="dialog"
+                fullscreen
+                hide-overlay
+                transition="dialog-bottom-transition"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                    Open Dialog
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-toolbar dark color="primary">
+                    <v-btn icon dark @click="dialog = false">
+                      <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>Settings</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                      <v-btn dark text @click="dialog = false">Save</v-btn>
+                    </v-toolbar-items>
+                  </v-toolbar>
+                  <v-list three-line subheader>
+                    <v-subheader>Categorías</v-subheader>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title>Content filtering</v-list-item-title>
+                        <v-list-item-subtitle
+                          >Set the content filtering level to restrict apps that
+                          can be downloaded</v-list-item-subtitle
+                        >
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-card>
+              </v-dialog>
+            </v-row>
+
             <!--</router-link>-->
 
             <v-select
@@ -84,8 +124,7 @@
         <!--Fin Cuentas y categorias-------------------->
 
         <!--Fecha y hora--------------------------->
-        <h1>{{cuentasSaldo}}</h1>
-        <h1>{{cuentasTodas}}</h1>
+
         <v-row>
           <!--Input Fecha-->
           <v-col cols="6" sm="6" md="4">
@@ -107,8 +146,12 @@
               </template>
               <v-date-picker v-model="nuevo.fecha" scrollable>
                 <v-spacer></v-spacer>
-                <v-btn text color="secondary" @click="modalFecha = false">Cancel</v-btn>
-                <v-btn text color="secondary" @click="$refs.dialog.save(date)">OK</v-btn>
+                <v-btn text color="secondary" @click="modalFecha = false"
+                  >Cancel</v-btn
+                >
+                <v-btn text color="secondary" @click="$refs.dialog.save(date)"
+                  >OK</v-btn
+                >
               </v-date-picker>
             </v-dialog>
           </v-col>
@@ -124,12 +167,22 @@
               width="290px"
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field v-model="nuevo.hora" label="Hora" readonly v-bind="attrs" v-on="on"></v-text-field>
+                <v-text-field
+                  v-model="nuevo.hora"
+                  label="Hora"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
               </template>
               <v-time-picker v-if="modalHora" v-model="nuevo.hora" full-width>
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalHora = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dialogHora.save(time)">OK</v-btn>
+                <v-btn text color="primary" @click="modalHora = false"
+                  >Cancel</v-btn
+                >
+                <v-btn text color="primary" @click="$refs.dialogHora.save(time)"
+                  >OK</v-btn
+                >
               </v-time-picker>
             </v-dialog>
           </v-col>
@@ -142,7 +195,10 @@
         <v-text-field label="Notas" v-model="nuevo.nota"></v-text-field>
 
         <!--Input Beneficiado-->
-        <v-text-field label="Beneficiado" v-model="nuevo.beneficiado"></v-text-field>
+        <v-text-field
+          label="Beneficiado"
+          v-model="nuevo.beneficiado"
+        ></v-text-field>
       </v-container>
     </v-form>
   </div>

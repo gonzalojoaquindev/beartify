@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <Navbar :titulo="'Pagos programados'" />
-    <TarjetaRegistro />
+    <TarjetaPagosProgramados />
     <v-btn
       :to="{ name: 'ProgramadoCrear' }"
       absolute
@@ -19,14 +19,12 @@
 
 <script>
 import { mapActions } from "vuex";
-import TarjetaRegistro from "@/components/TarjetaRegistro.vue";
-import BotonFlotante from "@/components/BotonFlotante.vue";
+import TarjetaPagosProgramados from "@/components/TarjetaPagosProgramados.vue";
 import Navbar from "@/components/Navbar.vue";
 export default {
   name: "ProgramadoLeer",
   components: {
-    TarjetaRegistro,
-    BotonFlotante,
+    TarjetaPagosProgramados,
     Navbar,
   },
 };

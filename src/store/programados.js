@@ -1,5 +1,6 @@
 import { db } from "../firebase";
 import router from "../router";
+import categorias from "./categorias";
 export default {
     namespaced: true,
     state: {
@@ -12,11 +13,46 @@ export default {
             cuentaOrigen: "",
             cuentaDestino: "",
             fecha: "",
-            hora: "",
             notas: "",
             beneficiado: "",
             etiqueta: "",
+            frecuencia: "",
+            repetir: "",
+            cada: "",
+            seguir: { nombre: "", eventos: "" },
+            recordar: "",
         },
+
+    },
+    getters: {
+        //componer un nuevo objeto que combine las propiedades del pago programado y según su categoria, añada las propiedades de la categoria como el color y el icono.
+        pagosProgramados(state, getters, rootState) {
+            return state.programados.map((item) => {
+                const categorial = rootState.categorias.categorias.find(
+                    (categoria) => categoria.nombre === item.categoria
+                );
+                return {
+                    tipo: item.tipo,
+                    monto: item.monto,
+                    cuentaOrigen: item.cuentaOrigen,
+                    cuentaDestino: item.cuentaDestino,
+                    nota: item.nota,
+                    beneficiado: item.beneficiado,
+                    etiquetas: item.etiquetas,
+                    fecha: item.fecha,
+                    frecuencia: item.frecuencia,
+                    repetir: item.repetir,
+                    cada: item.cada,
+                    /*           seguir: { nombre: item.seguir.nombre, evento: item.seguir.evento }, */
+                    recordar: item.recordar,
+                    color: categorial.color,
+                    categoria: categorial.nombre,
+                    icono: categorial.icono,
+                    id: item.id
+                };
+            });
+        },
+
     },
     mutations: {
         setProgramados(state, payload) {
@@ -36,7 +72,7 @@ export default {
                     res.forEach((doc) => {
                         let programado = doc.data();
                         programado.id = doc.id;
-                        programado.push(programados);
+                        programados.push(programado);
                     });
                     commit("setProgramados", programados);
                     console.log("Pagos programados leidos correctamente");
@@ -63,10 +99,14 @@ export default {
                     cuentaOrigen: programado.cuentaOrigen,
                     cuentaDestino: programado.cuentaDestino,
                     fecha: programado.fecha,
-                    hora: programado.hora,
                     beneficiado: programado.beneficiado,
                     nota: programado.nota,
                     etiqueta: programado.etiqueta,
+                    frecuencia: programado.frecuencia,
+                    repetir: programado.repetir,
+                    cada: programado.cada,
+                    seguir: { nombre: programado.seguir.nombre, evento: programado.seguir.evento },
+                    recordar: programado.recordar,
                 })
                 .then(() => {
                     console.log("Pago programado editado correctamente");
@@ -82,10 +122,15 @@ export default {
                     cuentaOrigen: nuevo.cuentaOrigen,
                     cuentaDestino: nuevo.cuentaDestino,
                     fecha: nuevo.fecha,
-                    hora: nuevo.hora,
+
                     beneficiado: nuevo.beneficiado,
                     nota: nuevo.nota,
                     etiqueta: nuevo.etiqueta,
+                    frecuencia: nuevo.frecuencia,
+                    repetir: nuevo.repetir,
+                    cada: nuevo.cada,
+                    seguir: { nombre: nuevo.seguir.nombre, evento: nuevo.seguir.evento },
+                    recordar: nuevo.recordar,
                 })
                 .then((doc) => {
                     console.log("Pago programado agregado correctamente");
