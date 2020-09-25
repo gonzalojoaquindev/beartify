@@ -1,10 +1,19 @@
 <template>
   <v-row>
-    <v-card width="96%" class="mx-auto mb-1" v-for="item in registros" :key="item.title">
+    <v-card
+      width="96%"
+      class="mx-auto mb-1"
+      v-for="item in registros"
+      :key="item.title"
+    >
       <v-list>
-        <v-list-item :to="{name: 'RegistroEditar', params:{id: item.id}}">
+        <v-list-item :to="{ name: 'RegistroEditar', params: { id: item.id } }">
           <v-list-item-avatar>
-            <v-icon color="orange" :class="[item.iconClass]" v-text="item.icon"></v-icon>
+            <v-icon
+              color="orange"
+              :class="[item.iconClass]"
+              v-text="item.icon"
+            ></v-icon>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -24,7 +33,7 @@
 
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "TarjetaRegistro",
   created() {
@@ -37,6 +46,7 @@ export default {
   //map state toma todo las piezas que tengamos en el state, en este caso estamos importando al array que contiene todos los registros.
   computed: {
     ...mapState("registros", ["registros"]),
+    ...mapGetters("registros", ["registros"]),
   },
 };
 </script>

@@ -1,8 +1,17 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <Navbar :titulo="'Registros'" />
     <TarjetaRegistro />
-    <v-btn :to="{name: 'RegistroCrear'}" absolute dark fab bottom right fixed color="secondary">
+    <v-btn
+      :to="{ name: 'RegistroCrear' }"
+      absolute
+      dark
+      fab
+      bottom
+      right
+      fixed
+      color="secondary"
+    >
       <v-icon>mdi-plus</v-icon>
     </v-btn>
   </v-container>
