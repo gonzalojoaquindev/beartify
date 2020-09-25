@@ -1,4 +1,4 @@
-import { db } from "../firebase";
+import { db, firebase } from "../firebase";
 import router from "../router";
 export default {
     namespaced: true,
@@ -8,10 +8,9 @@ export default {
             nombre: "",
             icono: "",
             color: "",
-            sub: [
-                { nombre: "", icono: "" }
-            ]
+            sub: []
         },
+        categoriaSeleccionada: ""
     },
     mutations: {
         setCategorias(state, payload) {
@@ -20,6 +19,7 @@ export default {
         setCategoria(state, payload) {
             state.categoria = payload;
         },
+
 
     },
     actions: {
@@ -56,6 +56,7 @@ export default {
                     nombre: categoria.nombre,
                     icono: categoria.icono,
                     color: categoria.color,
+
                 })
                 .then(() => {
                     console.log("categoria editada correctamente");
@@ -68,6 +69,7 @@ export default {
                     nombre: nuevo.nombre,
                     icono: nuevo.icono,
                     color: nuevo.color,
+                    sub: []
                 })
                 .then((doc) => {
                     console.log("categoria agregada correctamente");
@@ -83,10 +85,22 @@ export default {
                     router.push("/categorias");
                 });
         },
+        agregarSubcategoria({ commit }, subcategoria) {
+            db.collection("categorias")
+                .doc(subcategoria.id)
+                .update({
+                    sub: firebase.firestore.FieldValue.arrayUnion(subcategoria)
+                })
+                .then(() => {
+                    console.log("categoria editada correctamente");
+                    router.push("/categorias");
+                });
+        },
         editarSubcategoria({ commit }, subcategoria) {
             db.collection("categorias")
                 .doc(subcategoria.id)
                 .update({
+
                     nombre: subcategoria.nombre,
                     icono: subcategoria.icono,
 
@@ -96,17 +110,7 @@ export default {
                     router.push("/categorias");
                 });
         },
-        agregarSubcategoria({ commit }, nuevo) {
-            db.collection("categorias")
-                .add({
-                    nombre: nuevo.nombre,
-                    icono: nuevo.icono,
-                })
-                .then((doc) => {
-                    console.log("categoria agregada correctamente");
-                    router.push("/categorias");
-                });
-        },
+
         eliminarSubategoria({ commit }, idSubategoria) {
             db.collection("categorias")
                 .doc(idSubcategoria)

@@ -8,7 +8,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
-        <v-toolbar-title>{{categoria.nombre}}</v-toolbar-title>
+        <v-toolbar-title>{{ categoria.nombre }}</v-toolbar-title>
         <v-spacer></v-spacer>
 
         <!--Ventana modal------------>
@@ -20,12 +20,21 @@
           </template>
           <v-card>
             <v-card-title class="headline"></v-card-title>
-            <v-card-text>¿Estas seguro de que quieres eliminar este elemento?</v-card-text>
+            <v-card-text
+              >¿Estas seguro de que quieres eliminar este elemento?</v-card-text
+            >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="modalEliminar = false">NO</v-btn>
+              <v-btn color="primary" text @click="modalEliminar = false"
+                >NO</v-btn
+              >
               <!--aqui boton para eliminar---------->
-              <v-btn color="primary" text @click="eliminarCategoria(categoria.id)">SI</v-btn>
+              <v-btn
+                color="primary"
+                text
+                @click="eliminarCategoria(categoria.id)"
+                >SI</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -43,43 +52,62 @@
         <!--Incio de inputs---------->
         <v-row>
           <v-avatar class="mx-auto mb-1" size="70" :class="categoria.color">
-            <v-icon size="50">{{categoria.icono}}</v-icon>
+            <v-icon size="50">{{ categoria.icono }}</v-icon>
           </v-avatar>
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="Nombre de la Categoría" v-model="categoria.nombre"></v-text-field>
+            <v-text-field
+              label="Nombre de la Categoría"
+              v-model="categoria.nombre"
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="icono" v-model="categoria.icono"></v-text-field>
+            <v-text-field
+              label="icono"
+              v-model="categoria.icono"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="color" v-model="categoria.color"></v-text-field>
+            <v-text-field
+              label="color"
+              v-model="categoria.color"
+            ></v-text-field>
           </v-col>
         </v-row>
 
         <v-subheader v-if="categoria.sub != ['']">SUBCATEGORIAS</v-subheader>
         <v-row>
-          <v-card width="96%" class="mx-auto mb-1" v-for="item in categoria.sub" :key="item.title">
+          <v-card
+            width="96%"
+            class="mx-auto mb-1"
+            v-for="item in categoria.sub"
+            :key="item.title"
+          >
             <v-list>
               <v-list-item
-                :to="{name:'SubcategoriaEditar', 
-                params:
-                {id: categoria.id,
-                position: categoria.sub.indexOf(item)}
+                :to="{
+                  name: 'SubcategoriaEditar',
+                  params: {
+                    id: categoria.id,
+                    position: categoria.sub.indexOf(item),
+                  },
                 }"
               >
                 <v-list-item-avatar :color="categoria.color">
-                  <v-icon>{{item.icono}}</v-icon>
+                  <v-icon>{{ item.icono }}</v-icon>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{item.nombre}}</v-list-item-title>
+                  <v-list-item-title>{{ item.nombre }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </v-card>
           <v-btn
-            :to="{name: 'SubcategoriaCrear'}"
+            :to="{
+              name: 'SubcategoriaCrear',
+              params: { id: categoria.id },
+            }"
             absolute
             dark
             fab

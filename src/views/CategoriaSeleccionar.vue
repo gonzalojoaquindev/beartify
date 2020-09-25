@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar>
-      <v-btn icon :to="{name:'RegistroCrear'}">
+      <v-btn icon :to="{ name: 'RegistroCrear' }">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>Categoría</v-toolbar-title>
@@ -9,16 +9,23 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-btn icon :to="{name:'CategoriaLeer'}">
+      <v-btn icon :to="{ name: 'CategoriaLeer' }">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
     </v-toolbar>
     <v-container fluid>
       <h1>Seleccionar categoria</h1>
       <v-row>
-        <v-card width="96%" class="mx-auto mb-1" v-for="item in categorias" :key="item.title">
+        <v-card
+          width="96%"
+          class="mx-auto mb-1"
+          v-for="item in categorias"
+          :key="item.title"
+        >
           <v-list>
-            <v-list-item :to="{name:'SubcategoriaSeleccionar', params:{id: item.id}}">
+            <v-list-item
+              :to="{ name: 'SubcategoriaSeleccionar', params: { id: item.id } }"
+            >
               <v-list-item-avatar>
                 <v-icon :class="item.color" v-text="item.icono"></v-icon>
               </v-list-item-avatar>
@@ -40,10 +47,11 @@ import TarjetaCategoria from "@/components/TarjetaCategoria.vue";
 import BotonFlotante from "@/components/BotonFlotante.vue";
 import Snackbar from "@/components/Snackbar.vue";
 export default {
-  name: "CategoriaSelec",
+  name: "CategoriaSeleccionar",
   components: {
     TarjetaCategoria,
     BotonFlotante,
+    Snackbar,
   },
   created() {
     this.getCategorias();

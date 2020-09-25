@@ -90,7 +90,7 @@ const routes = [{
             import ("../views/SubcategoriaLeer.vue"),
     },
     {
-        path: "/crearsubcategoria",
+        path: "/crearsubcategoria/:id",
         name: "SubcategoriaCrear",
         component: () =>
             import ("../views/SubcategoriaCrear.vue"),

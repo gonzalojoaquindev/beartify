@@ -17,11 +17,13 @@ export default {
             notas: "",
             beneficiado: "",
             etiqueta: "",
+
         },
+
     },
     getters: {
-        //componer un nuevo objeto que combine las propiedades del registro y según su categoria, añada las propiedades de la categoria como el color y el icono.
-        registros(state, getters, rootState) {
+        //componer un nuevo objeto que combine las propiedades del pago registro y según su categoria, añada las propiedades de la categoria como el color y el icono.
+        registrosCategorias(state, getters, rootState) {
             return state.registros.map((item) => {
                 const categorial = rootState.categorias.categorias.find(
                     (categoria) => categoria.nombre === item.categoria
@@ -33,26 +35,35 @@ export default {
                     cuentaDestino: item.cuentaDestino,
                     nota: item.nota,
                     beneficiado: item.beneficiado,
-                    etiquetas: item.etiquetas,
+                    etiqueta: item.etiqueta,
                     fecha: item.fecha,
-                    id: item.id,
+                    hora: item.hora,
                     color: categorial.color,
                     categoria: categorial.nombre,
                     icono: categorial.icono,
+                    id: item.id
                 };
             });
         },
-    },
 
+    },
     mutations: {
+        setCategoriaSeleccionada(state, payload) {
+            state.registro.categoria = payload
+        },
         setRegistros(state, payload) {
             state.registros = payload;
         },
         setRegistro(state, payload) {
             state.registro = payload;
         },
+
     },
     actions: {
+        getCategoriaSeleccionada({ commit }, subcategoria) {
+            commit("setCategoriaSeleccionada", subcategoria)
+            router.push("/crearregistro")
+        },
         getRegistros({ commit }) {
             const registros = [];
             db.collection("registros")
@@ -64,7 +75,7 @@ export default {
                         registros.push(registro);
                     });
                     commit("setRegistros", registros);
-                    console.log("Registros leidos correctamente");
+                    console.log("Registro leidos correctamente");
                 });
         },
         getRegistro({ commit }, idRegistro) {
@@ -78,19 +89,20 @@ export default {
                     commit("setRegistro", registro);
                 });
         },
-        editarRegistro({ commit }, item) {
+        editarRegistro({ commit }, registro) {
             db.collection("registros")
-                .doc(item.id)
+                .doc(registro.id)
                 .update({
-                    tipo: item.tipo,
-                    monto: item.monto,
-                    categoria: item.categoria,
-                    cuentaOrigen: item.cuentaOrigen,
-                    cuentaDestino: item.cuentaDestino,
-                    fecha: item.fecha,
-                    beneficiado: item.beneficiado,
-                    nota: item.nota,
-                    etiqueta: item.etiqueta,
+                    tipo: registro.tipo,
+                    monto: registro.monto,
+                    categoria: registro.categoria,
+                    cuentaOrigen: registro.cuentaOrigen,
+                    cuentaDestino: registro.cuentaDestino,
+                    fecha: registro.fecha,
+                    beneficiado: registro.beneficiado,
+                    nota: registro.nota,
+                    etiqueta: registro.etiqueta,
+
                 })
                 .then(() => {
                     console.log("Registro editado correctamente");
@@ -102,11 +114,9 @@ export default {
                 .add({
                     tipo: nuevo.tipo,
                     monto: nuevo.monto,
-                    categoria: nuevo.categoria,
                     cuentaOrigen: nuevo.cuentaOrigen,
                     cuentaDestino: nuevo.cuentaDestino,
                     fecha: nuevo.fecha,
-                    hora: nuevo.hora,
                     beneficiado: nuevo.beneficiado,
                     nota: nuevo.nota,
                     etiqueta: nuevo.etiqueta,

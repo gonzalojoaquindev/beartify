@@ -20,12 +20,18 @@
           </template>
           <v-card>
             <v-card-title class="headline"></v-card-title>
-            <v-card-text>¿Estas seguro de que quieres eliminar este elemento?</v-card-text>
+            <v-card-text
+              >¿Estas seguro de que quieres eliminar este elemento?</v-card-text
+            >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="modalEliminar = false">NO</v-btn>
+              <v-btn color="primary" text @click="modalEliminar = false"
+                >NO</v-btn
+              >
               <!--aqui boton para eliminar---------->
-              <v-btn color="primary" text @click="eliminarRegistro(registro.id)">SI</v-btn>
+              <v-btn color="primary" text @click="eliminarRegistro(registro.id)"
+                >SI</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -54,7 +60,12 @@
         <v-row>
           <!--Monto----------------->
           <v-col cols="6" sm="6" md="3">
-            <v-text-field label="Monto" type="number" prefix="$" v-model="registro.monto"></v-text-field>
+            <v-text-field
+              label="Monto"
+              type="number"
+              prefix="$"
+              v-model="registro.monto"
+            ></v-text-field>
           </v-col>
           <!---------------------------->
           <!--Moneda-------------------------->
@@ -69,11 +80,19 @@
         <v-row>
           <!--Cuentas-->
           <v-col cols="6">
-            <v-select :items="categorias" label="Categoria" v-model="registro.categoria"></v-select>
+            <v-select
+              :items="categorias"
+              label="Categoria"
+              v-model="registro.categoria"
+            ></v-select>
           </v-col>
           <!--Categorias-->
           <v-col cols="6">
-            <v-select :items="cuentas" label="Cuenta" v-model="registro.cuenta"></v-select>
+            <v-select
+              :items="cuentas"
+              label="Cuenta"
+              v-model="registro.cuenta"
+            ></v-select>
           </v-col>
         </v-row>
         <!--Fin Cuentas y categorias-------------------->
@@ -102,8 +121,12 @@
 
               <v-date-picker v-model="registro.fecha" scrollable>
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalFecha = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                <v-btn text color="primary" @click="modalFecha = false"
+                  >Cancel</v-btn
+                >
+                <v-btn text color="primary" @click="$refs.dialog.save(date)"
+                  >OK</v-btn
+                >
               </v-date-picker>
             </v-dialog>
           </v-col>
@@ -127,10 +150,18 @@
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-time-picker v-if="modalHora" v-model="registro.hora" full-width>
+              <v-time-picker
+                v-if="modalHora"
+                v-model="registro.hora"
+                full-width
+              >
                 <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="modalHora = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dialog.save(time)">OK</v-btn>
+                <v-btn text color="primary" @click="modalHora = false"
+                  >Cancel</v-btn
+                >
+                <v-btn text color="primary" @click="$refs.dialog.save(time)"
+                  >OK</v-btn
+                >
               </v-time-picker>
             </v-dialog>
           </v-col>
@@ -143,7 +174,10 @@
         <v-text-field label="Notas" v-model="registro.nota"></v-text-field>
 
         <!--Input Beneficiado-->
-        <v-text-field label="Beneficiado" v-model="registro.beneficiado"></v-text-field>
+        <v-text-field
+          label="Beneficiado"
+          v-model="registro.beneficiado"
+        ></v-text-field>
       </v-container>
     </v-form>
   </div>
@@ -166,7 +200,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       time: null,
       cuentas: ["cuenta rut", "cuenta corriente", "Mastercard Banco Estado"],
-      categorias: ["viajes", "casa", "salud", "automovil"],
+      categorias: ["Viajes", "Casa", "Salud", "Automovil", "Diversión"],
       moneda: ["CLP", "USD"],
     };
   },
