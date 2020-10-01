@@ -40,11 +40,6 @@
           </tbody>
         </template>
       </v-simple-table>
-      <h3>cuentas:</h3>
-      <p>{{cuentas}}</p>
-      <br />
-      <h3>categorias</h3>
-      <p>{{categorias}}</p>
     </v-list>
   </v-card>
 </template>
@@ -91,7 +86,7 @@ export default {
     ...mapState("cuentas", ["cuentas"]),
     ...mapState("categorias", ["categorias"]),
 
-    gastos: function () {
+    gastos: function() {
       let formateados = this.categorias.map((categoria) => {
         return {
           categoria: categoria.nombre,

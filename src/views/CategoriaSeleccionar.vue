@@ -14,7 +14,6 @@
       </v-btn>
     </v-toolbar>
     <v-container fluid>
-      <h1>Seleccionar categoria</h1>
       <v-row>
         <v-card
           width="96%"

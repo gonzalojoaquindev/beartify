@@ -27,14 +27,14 @@
   </v-row>
 </template>
 
-
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import { currency } from "../currency.js";
 export default {
   name: "TarjetaRegistro",
   created() {
-    this.getRegistros();
     this.getCategorias();
+    this.getRegistros();
   },
   methods: {
     ...mapActions("registros", ["getRegistros"]),

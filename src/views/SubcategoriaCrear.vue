@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form @submit.prevent="agregarSubcategoria(subcategoria, id)">
+    <v-form @submit.prevent="agregarSubcategoria(subcategoria)">
       <v-toolbar>
         <v-app-bar-nav-icon>
           <v-dialog v-model="modalSalir" persistent max-width="290">
@@ -37,8 +37,7 @@
       </v-toolbar>
       <v-container>
         <!--Fin Ventana modal para salir---------->
-        <h4>Crear subcategoría en {{ id }}</h4>
-        <h5>{{ subcategoria }}</h5>
+
         <!--Incio de inputs---------->
         <v-row>
           <v-avatar class="mx-auto mb-1" size="70" :class="categoria.color">
@@ -74,7 +73,7 @@ export default {
     return {
       modalSalir: false,
       id: this.$route.params.id,
-      subcategoria: { nombre: "", icono: "", id: this.$route.params.id },
+      subcategoria: { nombre: "", icono: "mdi-", id: this.$route.params.id },
     };
   },
   created() {

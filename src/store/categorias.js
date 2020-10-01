@@ -8,9 +8,9 @@ export default {
             nombre: "",
             icono: "",
             color: "",
-            sub: []
+            sub: [],
         },
-        categoriaSeleccionada: ""
+        categoriaSeleccionada: "",
     },
     mutations: {
         setCategorias(state, payload) {
@@ -19,8 +19,6 @@ export default {
         setCategoria(state, payload) {
             state.categoria = payload;
         },
-
-
     },
     actions: {
         getCategorias({ commit }) {
@@ -56,7 +54,6 @@ export default {
                     nombre: categoria.nombre,
                     icono: categoria.icono,
                     color: categoria.color,
-
                 })
                 .then(() => {
                     console.log("categoria editada correctamente");
@@ -69,7 +66,7 @@ export default {
                     nombre: nuevo.nombre,
                     icono: nuevo.icono,
                     color: nuevo.color,
-                    sub: []
+                    sub: [],
                 })
                 .then((doc) => {
                     console.log("categoria agregada correctamente");
@@ -89,34 +86,10 @@ export default {
             db.collection("categorias")
                 .doc(subcategoria.id)
                 .update({
-                    sub: firebase.firestore.FieldValue.arrayUnion(subcategoria)
+                    sub: firebase.firestore.FieldValue.arrayUnion(subcategoria),
                 })
                 .then(() => {
-                    console.log("categoria editada correctamente");
-                    router.push("/categorias");
-                });
-        },
-        editarSubcategoria({ commit }, subcategoria) {
-            db.collection("categorias")
-                .doc(subcategoria.id)
-                .update({
-
-                    nombre: subcategoria.nombre,
-                    icono: subcategoria.icono,
-
-                })
-                .then(() => {
-                    console.log("subcategoria editada correctamente");
-                    router.push("/categorias");
-                });
-        },
-
-        eliminarSubategoria({ commit }, idSubategoria) {
-            db.collection("categorias")
-                .doc(idSubcategoria)
-                .delete()
-                .then(() => {
-                    console.log("subcategoria eliminada correctamente");
+                    console.log("Subcategoria agregada correctamente");
                     router.push("/categorias");
                 });
         },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--incio de formulario------------------------------------------->
-    <v-form @submit.prevent="editarCategoria(categoria)">
+    <v-form @submit.prevent="editarSubcategoria(categoria)">
       <!--Incio de toolbar--------------------------->
       <v-toolbar>
         <v-btn icon :to="{ name: 'CategoriaLeer' }">
@@ -20,12 +20,21 @@
           </template>
           <v-card>
             <v-card-title class="headline"></v-card-title>
-            <v-card-text>¿Estas seguro de que quieres eliminar este elemento?</v-card-text>
+            <v-card-text
+              >¿Estas seguro de que quieres eliminar este elemento?</v-card-text
+            >
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text @click="modalEliminar = false">NO</v-btn>
+              <v-btn color="primary" text @click="modalEliminar = false"
+                >NO</v-btn
+              >
               <!--aqui boton para eliminar---------->
-              <v-btn color="primary" text @click="eliminarCategoria(categoria.id)">SI</v-btn>
+              <v-btn
+                color="primary"
+                text
+                @click="eliminarSubcategoria(categoria.id)"
+                >SI</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -42,6 +51,9 @@
 
         <!--Incio de inputs---------->
         <v-row>
+          <v-avatar class="mx-auto mb-1" size="70" :class="categoria.color">
+            <v-icon size="50">{{ categoria.sub[position].icono }}</v-icon>
+          </v-avatar>
           <v-col cols="12" sm="6" md="3">
             <v-text-field
               label="Nombre de la subcategoría"
@@ -50,7 +62,10 @@
           </v-col>
 
           <v-col cols="12" sm="6" md="3">
-            <v-text-field label="icono" v-model="categoria.sub[position].icono"></v-text-field>
+            <v-text-field
+              label="icono"
+              v-model="categoria.sub[position].icono"
+            ></v-text-field>
           </v-col>
         </v-row>
         <!--Fin de inputs---------->
@@ -81,8 +96,8 @@ export default {
   methods: {
     ...mapActions("categorias", [
       "getCategoria",
-      "editarCategoria",
-      "eliminarCategoria",
+      "eliminarSubcategoria",
+      "editarSubcategoria",
     ]),
   },
   computed: {

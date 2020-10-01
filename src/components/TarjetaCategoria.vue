@@ -1,8 +1,13 @@
 <template>
   <v-row>
-    <v-card width="96%" class="mx-auto mb-1" v-for="item in categorias" :key="item.title">
+    <v-card
+      width="96%"
+      class="mx-auto mb-1"
+      v-for="item in categorias"
+      :key="item.title"
+    >
       <v-list>
-        <v-list-item :to="{name: 'CategoriaEditar', params:{id: item.id}}">
+        <v-list-item :to="{ name: 'CategoriaEditar', params: { id: item.id } }">
           <v-list-item-avatar>
             <v-icon :class="item.color" v-text="item.icono"></v-icon>
           </v-list-item-avatar>
@@ -15,6 +20,8 @@
     </v-card>
   </v-row>
 </template>
+
+
 
 
 <script>

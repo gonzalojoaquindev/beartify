@@ -18,7 +18,9 @@
         <v-subheader>GENERAL</v-subheader>
         <v-card width="96%" class="mx-auto mb-1">
           <v-list>
-            <v-list-item @click="getCategoriaSeleccionada(categoria.nombre)">
+            <v-list-item
+              @click="getCategoriaSeleccionada(categoriaSeleccionada)"
+            >
               <v-list-item-avatar>
                 <v-icon :class="categoria.color">{{ categoria.icono }}</v-icon>
               </v-list-item-avatar>
@@ -33,11 +35,11 @@
         <v-card
           width="96%"
           class="mx-auto mb-1"
-          v-for="item in categoria.sub"
-          :key="item.title"
+          v-for="(item, i) in categoria.sub"
+          :key="item.i"
         >
           <v-list>
-            <v-list-item @click="getCategoriaSeleccionada(item.nombre)">
+            <v-list-item @click="getCategoriaSeleccionada(categoria.sub[i])">
               <v-list-item-avatar :color="categoria.color">
                 <v-icon>{{ item.icono }}</v-icon>
               </v-list-item-avatar>
@@ -71,6 +73,16 @@ export default {
   },
   computed: {
     ...mapState("categorias", ["categoria"]),
+
+    //En el caso que se escoja la categoria en vez de una subcategoria, se iba a enviar a la base de datos, todoso los parametros de la ctagoria incluynedo todas sus subcategorias, esto era ineficiente ya que ocupaba mucho espacio de la DB, para solucionar esto, obtengo solo los paramatros necesarios como el nombre para mostrarlo en (nuevo regristro), el id para empatar y su icono.
+    categoriaSeleccionada() {
+      let destructurado = {
+        nombre: this.categoria.nombre,
+        id: this.$route.params.id,
+        icono: this.categoria.icono,
+      };
+      return destructurado;
+    },
   },
 };
 </script>

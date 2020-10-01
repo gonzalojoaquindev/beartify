@@ -17,16 +17,14 @@ export default {
             notas: "",
             beneficiado: "",
             etiqueta: "",
-
         },
-
     },
     getters: {
         //componer un nuevo objeto que combine las propiedades del pago registro y según su categoria, añada las propiedades de la categoria como el color y el icono.
         registrosCategorias(state, getters, rootState) {
             return state.registros.map((item) => {
                 const categorial = rootState.categorias.categorias.find(
-                    (categoria) => categoria.nombre === item.categoria
+                    (categoria) => categoria.id === item.categoria.id
                 );
                 return {
                     tipo: item.tipo,
@@ -39,17 +37,16 @@ export default {
                     fecha: item.fecha,
                     hora: item.hora,
                     color: categorial.color,
-                    categoria: categorial.nombre,
-                    icono: categorial.icono,
-                    id: item.id
+                    categoria: item.categoria.nombre,
+                    icono: item.categoria.icono,
+                    id: item.id,
                 };
             });
         },
-
     },
     mutations: {
         setCategoriaSeleccionada(state, payload) {
-            state.registro.categoria = payload
+            state.registro.categoria = payload;
         },
         setRegistros(state, payload) {
             state.registros = payload;
@@ -57,12 +54,11 @@ export default {
         setRegistro(state, payload) {
             state.registro = payload;
         },
-
     },
     actions: {
         getCategoriaSeleccionada({ commit }, subcategoria) {
-            commit("setCategoriaSeleccionada", subcategoria)
-            router.push("/crearregistro")
+            commit("setCategoriaSeleccionada", subcategoria);
+            router.push("/crearregistro");
         },
         getRegistros({ commit }) {
             const registros = [];
@@ -102,14 +98,13 @@ export default {
                     beneficiado: registro.beneficiado,
                     nota: registro.nota,
                     etiqueta: registro.etiqueta,
-
                 })
                 .then(() => {
                     console.log("Registro editado correctamente");
                     router.push("/registros");
                 });
         },
-        agregarRegistro({ commit }, nuevo) {
+        agregarRegistro({ dispatch, state, commit, getters, rootGetters }, nuevo) {
             db.collection("registros")
                 .add({
                     tipo: nuevo.tipo,
@@ -117,13 +112,18 @@ export default {
                     cuentaOrigen: nuevo.cuentaOrigen,
                     cuentaDestino: nuevo.cuentaDestino,
                     fecha: nuevo.fecha,
+                    hora: nuevo.hora,
                     beneficiado: nuevo.beneficiado,
                     nota: nuevo.nota,
                     etiqueta: nuevo.etiqueta,
+                    categoria: state.registro.categoria,
                 })
                 .then((doc) => {
-                    console.log("Registro agregado correctamente");
+                    console.log("Registro agregado correctamente:", nuevo);
                     router.push("/registros");
+
+                    //Despachar la accion para que se actualice el saldo en el módulo de cuentas.
+                    dispatch("cuentas/actualizarSaldo", nuevo, { root: true });
                 });
         },
         eliminarRegistro({ commit }, idRegistro) {

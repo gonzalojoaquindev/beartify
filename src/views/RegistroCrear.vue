@@ -51,7 +51,7 @@
               v-if="nuevo.tipo === 1"
               :items="cuentasTodas"
               label="Cuenta"
-              v-model="nuevo.cuenta"
+              v-model="nuevo.cuentaOrigen"
             ></v-select>
             <!--Si es una trasnferencia -->
             <v-select
@@ -68,7 +68,7 @@
               <v-text-field
                 v-if="nuevo.tipo !== 2"
                 label="Categoria"
-                v-model="registro.categoria"
+                v-model="registro.categoria.nombre"
               ></v-text-field>
             </router-link>
 
@@ -179,8 +179,7 @@ export default {
         beneficiado: "",
         fecha: new Date().toISOString().substr(0, 10),
         hora: new Date().toString().substr(16, 5),
-        icon: "",
-        tipo: "",
+        tipo: 1,
         cuentaDestino: "",
         cuentaOrigen: "",
         etiqueta: "",
@@ -199,7 +198,7 @@ export default {
 
   methods: {
     ...mapActions("registros", ["agregarRegistro"]),
-    ...mapActions("cuentas", ["getCuentas"]),
+    ...mapActions("cuentas", ["getCuentas", "actualizarSaldo"]),
   },
   computed: {
     ...mapState("cuentas", ["cuentas"]),
